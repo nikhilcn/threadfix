@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.denimgroup.threadfix.framework.beans.PathCleaner;
 import com.denimgroup.threadfix.framework.enums.FrameworkType;
+import com.denimgroup.threadfix.framework.impl.django.DJANGOMappings;
 import com.denimgroup.threadfix.framework.impl.jsp.JSPMappings;
 import com.denimgroup.threadfix.framework.impl.spring.SpringControllerMappings;
 import com.denimgroup.threadfix.framework.util.SanitizedLogger;
@@ -32,6 +33,7 @@ public class EndpointDatabaseFactory {
 		switch (frameworkType) {
 			case JSP:        generator = new JSPMappings(rootFile);              break;
 			case SPRING_MVC: generator = new SpringControllerMappings(rootFile); break;
+			case DJANGO:     generator = new DJANGOMappings(rootFile);           break;
 			default:
 		}
 		

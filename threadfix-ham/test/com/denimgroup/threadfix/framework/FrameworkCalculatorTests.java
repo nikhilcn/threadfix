@@ -26,6 +26,13 @@ public class FrameworkCalculatorTests {
 	}
 	
 	@Test
+	public void DjangoTest() {
+		assertTrue("Didn't find Django.",
+				FrameworkCalculator.getType(new File(TestConstants.DJANGO_SOURCE_LOCATION)) 
+				== FrameworkType.DJANGO);
+	}
+	
+	@Test
 	public void wavsepTest() {
 		assertTrue("Didn't find JSP.",
 				FrameworkCalculator.getType(new File(TestConstants.WAVSEP_SOURCE_LOCATION)) 

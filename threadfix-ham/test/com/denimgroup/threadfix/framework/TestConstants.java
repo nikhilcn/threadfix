@@ -36,6 +36,7 @@ public class TestConstants {
 		PETCLINIC_SOURCE_LOCATION = testRoot + extensions[0],
 		WAVSEP_SOURCE_LOCATION = testRoot + extensions[1],
 		BODGEIT_SOURCE_LOCATION = testRoot + extensions[2],
+		DJANGO_SOURCE_LOCATION = testRoot + extensions[3],
 		PETCLINIC_WEB_XML = PETCLINIC_SOURCE_LOCATION + "/src/main/webapp/WEB-INF/web.xml",
 		WAVSEP_WEB_XML = WAVSEP_SOURCE_LOCATION + "/trunk/WebContent/WEB-INF/web.xml",
 		BODGEIT_WEB_XML = BODGEIT_SOURCE_LOCATION + "/root/WEB-INF/web.xml",

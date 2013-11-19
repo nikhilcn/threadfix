@@ -111,6 +111,10 @@ public class ProjectDirectory {
 		return findFile("web.xml", "WEB-INF", "web.xml");
 	}
 	
+	public File findManagePy() {
+		return findFile("manage.py");
+	}
+	
 	public List<File> findFiles(String pathWithStars) {
 		List<File> files;
 		

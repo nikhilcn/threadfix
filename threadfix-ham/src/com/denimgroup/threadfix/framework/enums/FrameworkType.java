@@ -24,7 +24,7 @@
 package com.denimgroup.threadfix.framework.enums;
 
 public enum FrameworkType {
-	NONE("None"), DETECT("Detect"), JSP("JSP"), SPRING_MVC("Spring MVC");
+	NONE("None"), DETECT("Detect"), JSP("JSP"), SPRING_MVC("Spring MVC"), DJANGO("DJANGO");
 	
 	FrameworkType(String displayName) {
 		this.displayName = displayName;

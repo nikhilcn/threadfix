@@ -17,8 +17,15 @@ public class FrameworkCalculator {
 		log.info("File: " + rootFile);
 		
 		FrameworkType frameworkType = FrameworkType.NONE;
-		
-		if (rootFile != null && rootFile.exists() && rootFile.isDirectory()) {
+		if(rootFile != null && rootFile.exists() &&rootFile.isDirectory()){
+			ProjectDirectory projectDirectory= new ProjectDirectory(rootFile);
+			File managePy =  projectDirectory.findManagePy();
+			if(managePy != null && managePy.exists())
+				frameworkType=FrameworkType.DJANGO;
+			else
+				frameworkType=FrameworkType.NONE;
+		}
+		if (frameworkType==FrameworkType.NONE) {
 			ProjectDirectory projectDirectory = new ProjectDirectory(rootFile);
 			
 			File webXML = projectDirectory.findWebXML();
