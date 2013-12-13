@@ -38,14 +38,14 @@ import com.denimgroup.threadfix.data.entities.Application;
 import com.denimgroup.threadfix.data.entities.ApplicationChannel;
 import com.denimgroup.threadfix.data.entities.ChannelType;
 import com.denimgroup.threadfix.data.entities.Permission;
+import com.denimgroup.threadfix.plugin.scanner.service.ScanTypeCalculationService;
+import com.denimgroup.threadfix.plugin.scanner.service.channel.ScanImportStatus;
 import com.denimgroup.threadfix.service.ApplicationChannelService;
 import com.denimgroup.threadfix.service.ApplicationService;
 import com.denimgroup.threadfix.service.ChannelTypeService;
 import com.denimgroup.threadfix.service.PermissionService;
 import com.denimgroup.threadfix.service.SanitizedLogger;
 import com.denimgroup.threadfix.service.ScanService;
-import com.denimgroup.threadfix.service.ScanTypeCalculationService;
-import com.denimgroup.threadfix.service.channel.ScanImportStatus;
 
 @Controller
 @RequestMapping("/organizations/{orgId}/applications/{appId}/scans/upload")
@@ -129,7 +129,7 @@ public class UploadScanController {
 			return index(orgId, appId, SCANNER_TYPE_ERROR, null);
 		}
 		
-		ScanCheckResultBean returnValue = null;
+		ScanCheckResultBean returnValue;
 		
 		String fileName = scanTypeCalculationService.saveFile(myChannelId, file);
 		
@@ -172,7 +172,7 @@ public class UploadScanController {
 					&& app.getOrganization().getId() != null) {
 				ChannelType channelType = null;
 				
-				if (returnValue.getScanCheckResult() != null && 
+				if (returnValue != null && returnValue.getScanCheckResult() != null &&
 						(returnValue.getScanCheckResult().equals(ScanImportStatus.BADLY_FORMED_XML) ||
 						returnValue.getScanCheckResult().equals(ScanImportStatus.WRONG_FORMAT_ERROR) ||
 						returnValue.getScanCheckResult().equals(ScanImportStatus.OTHER_ERROR))) {

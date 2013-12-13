@@ -54,7 +54,8 @@ public class TeamDetailPage extends BasePage {
 	
 	
 	public TeamDetailPage clickEditOrganizationLink() {
-		driver.findElementById("teamModalButton").click();
+        driver.findElementById("actionButton").click();
+        driver.findElementById("teamModalButton").click();
 		waitForElement(driver.findElementById("teamModal"));
 		return new TeamDetailPage(driver);
 	}
@@ -126,7 +127,7 @@ public class TeamDetailPage extends BasePage {
 	}
 	
 	public Map<String, Integer> getVulnCountForApps() {
-		Map<String, Integer> map = new HashMap<String,Integer>();
+		Map<String, Integer> map = new HashMap<>();
 		
 		// get app names
 		List<WebElement> appLinks = applicationsTableBody.findElements(By.xpath(".//tr/td/a"));

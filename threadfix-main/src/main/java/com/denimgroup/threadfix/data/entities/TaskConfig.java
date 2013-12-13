@@ -24,6 +24,8 @@
 
 package com.denimgroup.threadfix.data.entities;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -35,19 +37,20 @@ import java.util.Map;
  *
  */
 public class TaskConfig {
+    @NotNull
 	private URL targetUrl;
 	private Map<String,byte[]> dataBlobs;
 	private Map<String,String> configParams;
 	
 	public TaskConfig() {
-		this.dataBlobs = new HashMap<String,byte[]>();
-		this.configParams = new HashMap<String,String>();
+		this.dataBlobs = new HashMap<>();
+		this.configParams = new HashMap<>();
 	}
 	
-	public TaskConfig(URL targetUrl) {
+	public TaskConfig(@NotNull URL targetUrl) {
 		this.targetUrl = targetUrl;
-		this.dataBlobs = new HashMap<String,byte[]>();
-		this.configParams = new HashMap<String,String>();
+		this.dataBlobs = new HashMap<>();
+		this.configParams = new HashMap<>();
 	}
 	
 	public void setDataBlob(String key, byte[] value) {
@@ -76,7 +79,7 @@ public class TaskConfig {
 		return this.configParams;
 	}
 	
-	public void setTargetUrlString(String targetUrlString) {
+	public void setTargetUrlString(@NotNull String targetUrlString) {
 			try {
 				this.targetUrl = new URL(targetUrlString);
 			} catch (MalformedURLException e) {
@@ -84,11 +87,13 @@ public class TaskConfig {
 				e.printStackTrace();
 			}
 	}
-	
+
+    @NotNull
 	public URL getTargetUrl() {
 		return this.targetUrl;
 	}
-	
+
+    @NotNull
 	public String getTargetUrlString() {
 		return this.targetUrl.toString();
 	}

@@ -24,24 +24,22 @@
 
 package com.denimgroup.threadfix.scanagent.configuration;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class OperatingSystem {
+    @NotNull
 	private String name;
+    @Nullable
 	private String version;
 	
-	public OperatingSystem(String name, String version) {
+	public OperatingSystem(@NotNull String name, @Nullable String version) {
 		this.name = name;
 		this.version = version;
 	}
-	
-	public String getName() {
-		return(name);
-	}
-	
-	public String getVersion() {
-		return(version);
-	}
-	
-	@Override
+
+	@NotNull
+    @Override
 	public String toString() {
 		String retVal = "OperatingSystem { name=" + name + ", version=" + version + " }";
 		return(retVal);

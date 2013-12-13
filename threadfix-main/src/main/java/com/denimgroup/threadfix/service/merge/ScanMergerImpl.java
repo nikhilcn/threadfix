@@ -27,20 +27,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.denimgroup.threadfix.data.dao.ScanDao;
+import com.denimgroup.threadfix.data.dao.VulnerabilityDao;
 import com.denimgroup.threadfix.data.entities.ApplicationChannel;
 import com.denimgroup.threadfix.data.entities.Scan;
 import com.denimgroup.threadfix.service.SanitizedLogger;
+import com.denimgroup.threadfix.service.translator.PathGuesser;
 
 @Service
 public class ScanMergerImpl implements ScanMerger {
 	
 	private final SanitizedLogger log = new SanitizedLogger("ScanMergerImpl");
 	
-	private ChannelMerger channelMerger = new ChannelMerger();
+	private ChannelMerger channelMerger = null;
 	@Autowired private ApplicationMerger applicationMerger;
 	@Autowired private ScanDao scanDao;
+	@Autowired private VulnerabilityDao vulnerabilityDao;
 	
-	public void merge(Scan scan, ApplicationChannel applicationChannel, ScanMergeConfiguration configuration) {
+	@Override
+	public void merge(Scan scan, ApplicationChannel applicationChannel) {
+		if (channelMerger == null) {
+			channelMerger = new ChannelMerger(vulnerabilityDao);
+		}
+		
 		if (scan.getFindings() != null && applicationChannel != null
 				&& applicationChannel.getChannelType() != null
 				&& applicationChannel.getChannelType().getName() != null) {
@@ -56,7 +64,7 @@ public class ScanMergerImpl implements ScanMerger {
 			return;
 		}
 	
-		PathGuesser.generateGuesses(configuration, scan);
+		PathGuesser.generateGuesses2(applicationChannel.getApplication(), scan);
 		channelMerger.channelMerge(scan, applicationChannel);
 		applicationMerger.applicationMerge(scan, applicationChannel.getApplication(), null);
 	

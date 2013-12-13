@@ -36,6 +36,7 @@ import com.denimgroup.threadfix.data.dao.ChannelTypeDao;
 import com.denimgroup.threadfix.data.entities.Application;
 import com.denimgroup.threadfix.data.entities.ApplicationChannel;
 import com.denimgroup.threadfix.data.entities.ChannelType;
+import com.denimgroup.threadfix.data.entities.ScannerType;
 
 @Service
 @Transactional(readOnly = true)
@@ -73,15 +74,15 @@ public class ChannelTypeServiceImpl implements ChannelTypeService {
 	
 	@Override
 	public List<ChannelType> getChannelTypeOptions(Application application) {
-		List<ChannelType> channelTypeList = channelTypeDao.retrieveAll(), editedList = new ArrayList<ChannelType>();
+		List<ChannelType> channelTypeList = channelTypeDao.retrieveAll(), editedList = new ArrayList<>();
 		if (channelTypeList == null)
 			return null;
 		
-		Set<String> doNotIncludeList = new HashSet<String>();
-		doNotIncludeList.add(ChannelType.SENTINEL);
-		doNotIncludeList.add(ChannelType.VERACODE);
-		doNotIncludeList.add(ChannelType.QUALYSGUARD_WAS);
-		doNotIncludeList.add(ChannelType.MANUAL);
+		Set<String> doNotIncludeList = new HashSet<>();
+		doNotIncludeList.add(ScannerType.SENTINEL.getFullName());
+		doNotIncludeList.add(ScannerType.VERACODE.getFullName());
+		doNotIncludeList.add(ScannerType.QUALYSGUARD_WAS.getFullName());
+		doNotIncludeList.add(ScannerType.MANUAL.getFullName());
 		
 		if (application != null && application.getChannelList() != null && 
 				application.getChannelList().size() != 0) {

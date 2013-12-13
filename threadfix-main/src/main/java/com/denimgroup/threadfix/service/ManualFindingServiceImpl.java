@@ -24,12 +24,11 @@ import com.denimgroup.threadfix.data.entities.ChannelVulnerability;
 import com.denimgroup.threadfix.data.entities.Finding;
 import com.denimgroup.threadfix.data.entities.GenericSeverity;
 import com.denimgroup.threadfix.data.entities.Scan;
+import com.denimgroup.threadfix.data.entities.ScannerType;
 import com.denimgroup.threadfix.data.entities.User;
 import com.denimgroup.threadfix.data.entities.Vulnerability;
 import com.denimgroup.threadfix.service.merge.ApplicationMerger;
-import com.denimgroup.threadfix.service.merge.MergeConfigurationGenerator;
 import com.denimgroup.threadfix.service.merge.ScanCleanerUtils;
-import com.denimgroup.threadfix.service.translator.DefaultTranslator;
 
 @Service
 public class ManualFindingServiceImpl implements ManualFindingService {
@@ -114,7 +113,7 @@ public class ManualFindingServiceImpl implements ManualFindingService {
 			return false;
 		}
 		
-		ChannelType manualChannelType = channelTypeDao.retrieveByName(ChannelType.MANUAL);
+		ChannelType manualChannelType = channelTypeDao.retrieveByName(ScannerType.MANUAL.getFullName());
 
 		Scan scan = getManualScan(applicationId);
 		if (scan == null || scan.getApplicationChannel() == null
@@ -151,8 +150,7 @@ public class ManualFindingServiceImpl implements ManualFindingService {
 		if (!finding.getIsStatic()) {
 			finding.setDataFlowElements(null);
 		} else {
-			String path = new DefaultTranslator(MergeConfigurationGenerator.generateConfiguration(
-					scan.getApplication(), scan), scan).getUrlPath(finding);
+			String path = finding.getSurfaceLocation().getPath();
 			if (path != null
 					&& scan.getApplication().getProjectRoot() != null
 					&& scan.getApplication().getProjectRoot().toLowerCase() != null
@@ -187,7 +185,7 @@ public class ManualFindingServiceImpl implements ManualFindingService {
 
 		ApplicationChannel applicationChannel = null;
 		ChannelType manualChannel = channelTypeDao
-				.retrieveByName(ChannelType.MANUAL);
+				.retrieveByName(ScannerType.MANUAL.getFullName());
 		if (manualChannel != null)
 			applicationChannel = applicationChannelDao
 					.retrieveByAppIdAndChannelId(applicationId,
@@ -223,7 +221,7 @@ public class ManualFindingServiceImpl implements ManualFindingService {
 		Scan scan = new Scan();
 		scan.setApplication(application);
 
-		List<Finding> findingList = new ArrayList<Finding>();
+		List<Finding> findingList = new ArrayList<>();
 		scan.setFindings(findingList);
 
 		scan.setNumberNewVulnerabilities(0);
@@ -249,7 +247,7 @@ public class ManualFindingServiceImpl implements ManualFindingService {
 		ApplicationChannel applicationChannel = new ApplicationChannel();
 		applicationChannel.setApplication(application);
 		ChannelType manualChannel = channelTypeDao
-				.retrieveByName(ChannelType.MANUAL);
+				.retrieveByName(ScannerType.MANUAL.getFullName());
 		applicationChannel.setChannelType(manualChannel);
 
 		if (application.getChannelList() == null)

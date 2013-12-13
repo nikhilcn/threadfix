@@ -39,9 +39,9 @@ import com.denimgroup.threadfix.data.entities.ApplicationChannel;
 import com.denimgroup.threadfix.data.entities.EmptyScan;
 import com.denimgroup.threadfix.data.entities.Permission;
 import com.denimgroup.threadfix.data.entities.Scan;
-import com.denimgroup.threadfix.service.channel.ChannelImporter;
-import com.denimgroup.threadfix.service.channel.ChannelImporterFactory;
-import com.denimgroup.threadfix.service.channel.ScanImportStatus;
+import com.denimgroup.threadfix.plugin.scanner.ChannelImporterFactory;
+import com.denimgroup.threadfix.plugin.scanner.service.channel.ChannelImporter;
+import com.denimgroup.threadfix.plugin.scanner.service.channel.ScanImportStatus;
 import com.denimgroup.threadfix.service.queue.QueueSender;
 import com.denimgroup.threadfix.webapp.controller.ScanCheckResultBean;
 
@@ -137,7 +137,7 @@ public class ScanServiceImpl implements ScanService {
 		
 		Calendar scanQueueDate = applicationChannelDao.getMostRecentQueueScanTime(channel.getId());
 		
-		if (scanQueueDate != null && result.getTestDate() != null && 
+		if (scanQueueDate != null && result != null && result.getTestDate() != null &&
 				!result.getTestDate().after(scanQueueDate)) {
 			log.warn(ScanImportStatus.MORE_RECENT_SCAN_ON_QUEUE.toString());
 			return new ScanCheckResultBean(ScanImportStatus.MORE_RECENT_SCAN_ON_QUEUE, result.getTestDate());

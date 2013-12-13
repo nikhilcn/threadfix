@@ -37,6 +37,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
@@ -211,7 +212,7 @@ public class ScanQueueTask extends AuditableEntity {
 
 	public void addScanStatus(ScanStatus status) {
 		if(this.scanStatuses == null) {
-			this.scanStatuses = new ArrayList<ScanStatus>();
+			this.scanStatuses = new ArrayList<>();
 		}
 		this.scanStatuses.add(status);
 	}
@@ -240,22 +241,25 @@ public class ScanQueueTask extends AuditableEntity {
 	 * @return true if the scanner name is valid, false if it is not valid
 	 */
 	public static boolean validateScanner(String proposedScanner) {
-		boolean retVal = false;
-		
-		if (proposedScanner != null && proposedScanner.length() <= 32) {
-			boolean foundBadChar = false;
-			for (int i=0; i < proposedScanner.length(); ++i) {
-				if (!Character.isLetterOrDigit(proposedScanner.charAt(i))) {
-					foundBadChar = true;
-					break;
-				}
-			}
-			if(!foundBadChar) {
-				retVal = true;
-			}
-		}
-		
-		return retVal;
+//		boolean retVal = false;
+
+        return (ScannerType.getScannerType(proposedScanner) != null);
+
+
+//		if (proposedScanner != null && proposedScanner.length() <= 32) {
+//			boolean foundBadChar = false;
+//			for (int i=0; i < proposedScanner.length(); ++i) {
+//				if (!Character.isLetterOrDigit(proposedScanner.charAt(i))) {
+//					foundBadChar = true;
+//					break;
+//				}
+//			}
+//			if(!foundBadChar) {
+//				retVal = true;
+//			}
+//		}
+//
+//		return retVal;
 	}
 	
 	/**
@@ -269,7 +273,8 @@ public class ScanQueueTask extends AuditableEntity {
 		String retVal = null;
 		
 		if(validateScanner(scannerType)) {
-			retVal = scannerType + "." + SCANAGENT_CONFIG_FILE_EXTENSION;
+            String sScannerType = ScannerType.getScannerType(scannerType).getShortName();
+			retVal = sScannerType + "." + SCANAGENT_CONFIG_FILE_EXTENSION;
 		}
 		
 		return retVal;
@@ -290,12 +295,10 @@ public class ScanQueueTask extends AuditableEntity {
 		return sb.toString();
 	}
 	
-//	public String[] getTaskStatusList() {
-//		int noOfStatuses = ScanQueueTaskStatus.values().length;
-//		String[] statusList = new String[noOfStatuses];
-//		for (int i=0; i<noOfStatuses; i++)
-//			statusList[i] = ScanQueueTaskStatus.values()[i].getDescription();
-//
-//		return statusList;
-//	}
+	@Transient
+	public String getScannerShortName() {
+		return ScannerType.getShortName(getScanner());
+	}
+	
+
 }

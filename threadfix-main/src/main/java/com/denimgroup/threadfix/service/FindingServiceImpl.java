@@ -50,6 +50,7 @@ import com.denimgroup.threadfix.data.entities.ChannelVulnerability;
 import com.denimgroup.threadfix.data.entities.DataFlowElement;
 import com.denimgroup.threadfix.data.entities.Finding;
 import com.denimgroup.threadfix.data.entities.GenericVulnerability;
+import com.denimgroup.threadfix.data.entities.ScannerType;
 import com.denimgroup.threadfix.data.entities.SurfaceLocation;
 import com.denimgroup.threadfix.data.entities.User;
 import com.denimgroup.threadfix.webapp.controller.AddFindingRestController;
@@ -111,7 +112,7 @@ public class FindingServiceImpl implements FindingService {
 						if (genericVulnerability != null) {
 							cweName = genericVulnerability.getName();
 							if (cweName != null) {
-								manualType = channelTypeDao.retrieveByName(ChannelType.MANUAL);
+								manualType = channelTypeDao.retrieveByName(ScannerType.MANUAL.getFullName());
 								if (manualType != null) {
 									newChannelVuln = channelVulnerabilityDao.retrieveByName(manualType, cweName);
 								}
@@ -268,7 +269,7 @@ public class FindingServiceImpl implements FindingService {
 		if (vulnType != null) {
 			channelVulnerability = channelVulnerabilityDao
 				.retrieveByCode(
-						channelTypeDao.retrieveByName(ChannelType.MANUAL),
+						channelTypeDao.retrieveByName(ScannerType.MANUAL.getFullName()),
 						vulnType);
 		}
 		
@@ -333,7 +334,7 @@ public class FindingServiceImpl implements FindingService {
 			return null;
 		List<Finding> findings = loadLatestStaticByAppAndUser(appId, userId);
 		if(findings == null) return null;
-		List<String> cvList = new ArrayList<String>();
+		List<String> cvList = new ArrayList<>();
 		for(Finding finding : findings) {
 			if (finding == null || finding.getChannelVulnerability() == null || 
 					finding.getChannelVulnerability().getCode() == null)
@@ -354,7 +355,7 @@ public class FindingServiceImpl implements FindingService {
 			return null;
 		List<Finding> findings = loadLatestDynamicByAppAndUser(appId, userId);
 		if(findings == null) return null;
-		List<String> cvList = new ArrayList<String>();
+		List<String> cvList = new ArrayList<>();
 		for(Finding finding : findings) {
 			if (finding == null || finding.getChannelVulnerability() == null || 
 					finding.getChannelVulnerability().getCode() == null)
@@ -375,7 +376,7 @@ public class FindingServiceImpl implements FindingService {
 			return null;
 		List<Finding> findings = loadLatestStaticByAppAndUser(appId, userId);
 		if(findings == null) return null;
-		List<String> pathList = new ArrayList<String>();
+		List<String> pathList = new ArrayList<>();
 		for(Finding finding : findings) {
 			if (finding == null || finding.getSurfaceLocation() == null || 
 					finding.getSurfaceLocation().getPath() == null)
@@ -396,7 +397,7 @@ public class FindingServiceImpl implements FindingService {
 			return null;
 		List<Finding> findings = loadLatestDynamicByAppAndUser(appId, userId);
 		if(findings == null) return null;
-		List<String> pathList = new ArrayList<String>();
+		List<String> pathList = new ArrayList<>();
 		for(Finding finding : findings) {
 			if (finding == null || finding.getSurfaceLocation() == null || 
 					finding.getSurfaceLocation().getPath() == null)
@@ -408,8 +409,8 @@ public class FindingServiceImpl implements FindingService {
 	
 	private List<String> removeDuplicates(List<String> stringList) {
 		if (stringList == null)
-			return new ArrayList<String>();
-		List<String> distinctStringList = new ArrayList<String>();
+			return new ArrayList<>();
+		List<String> distinctStringList = new ArrayList<>();
 		for (int i = 0; i < stringList.size(); i++) {
 			int j = 0;
 			for (; j < i; j++) {
@@ -425,7 +426,7 @@ public class FindingServiceImpl implements FindingService {
 	
 	@Override
 	public List<ChannelSeverity> getManualSeverities() {
-		ChannelType channelType = channelTypeDao.retrieveByName(ChannelType.MANUAL);
+		ChannelType channelType = channelTypeDao.retrieveByName(ScannerType.MANUAL.getFullName());
 		return channelSeverityDao.retrieveByChannel(channelType);
 	}
 

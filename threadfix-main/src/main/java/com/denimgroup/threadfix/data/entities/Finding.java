@@ -39,10 +39,12 @@ import javax.validation.constraints.Size;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Cascade;
 
-import com.denimgroup.threadfix.framework.beans.PartialMapping;
-import com.denimgroup.threadfix.framework.engine.EndpointQuery;
-import com.denimgroup.threadfix.framework.engine.EndpointQueryBuilder;
+import com.denimgroup.threadfix.framework.engine.full.EndpointQuery;
+import com.denimgroup.threadfix.framework.engine.full.EndpointQueryBuilder;
+import com.denimgroup.threadfix.framework.engine.partial.PartialMapping;
 import com.denimgroup.threadfix.framework.enums.FrameworkType;
+import com.denimgroup.threadfix.framework.enums.InformationSourceType;
+import org.jetbrains.annotations.NotNull;
 
 @Entity
 @Table(name = "Finding")
@@ -314,6 +316,16 @@ public class Finding extends AuditableEntity implements FindingLike {
 			}
 		}
 		
+		if (isStatic) {
+			builder.setInformationSourceType(InformationSourceType.STATIC);
+		} else {
+			builder.setInformationSourceType(InformationSourceType.DYNAMIC);
+		}
+		
+		if (sourceFileLocation != null) {
+			builder.setStaticPath(sourceFileLocation);
+		}
+		
 		if (dataFlowElements != null && !dataFlowElements.isEmpty()) {
 			builder.setCodePoints(dataFlowElements);
 		}
@@ -340,9 +352,10 @@ public class Finding extends AuditableEntity implements FindingLike {
 				}
 			}
 
+            @NotNull
 			@Override
 			public FrameworkType guessFrameworkType() {
-				return null;
+				return FrameworkType.NONE;
 			}
 			
 		};

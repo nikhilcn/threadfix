@@ -13,7 +13,7 @@
   <description>Scan agent for the ThreadFix application vulnerability management platform</description>
   
   <build>
-	<sourceDirectory>src</sourceDirectory>
+	<sourceDirectory>src/main/java</sourceDirectory>
 	<plugins>
 		<plugin>
 			<artifactId>maven-compiler-plugin</artifactId>
@@ -28,7 +28,7 @@
 	      <configuration>
 	        <archive>
 	          <manifest>
-	            <mainClass>com.denimgroup.threadfix.scanagent.ScanAgentRunner</mainClass>
+	            <mainClass>com.denimgroup.threadfix.scanagent.ScanAgentMain</mainClass>
 	          </manifest>
 	        </archive>
 	        <descriptorRefs>
@@ -40,19 +40,19 @@
   </build>
   
   <repositories>
-		<repository>
-			<id>lib</id>
-			<name>lib</name>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>ignore</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<checksumPolicy>ignore</checksumPolicy>
-			</snapshots>
-			<url>file://${project.basedir}/lib</url>
-		</repository>
+      <repository>
+          <id>lib</id>
+          <name>lib</name>
+          <releases>
+              <enabled>true</enabled>
+              <checksumPolicy>ignore</checksumPolicy>
+          </releases>
+          <snapshots>
+              <enabled>true</enabled>
+              <checksumPolicy>ignore</checksumPolicy>
+          </snapshots>
+          <url>file://${project.basedir}/lib</url>
+      </repository>
 		<repository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
@@ -79,6 +79,11 @@
   </issueManagement>
   
   <dependencies>
+      <dependency>
+          <groupId>org.jetbrains.annotations</groupId>
+          <artifactId>annotations</artifactId>
+          <version>13</version>
+      </dependency>
   	<dependency>
 		<groupId>org.zaproxy.clientapi.core</groupId>
 		<artifactId>zap-api</artifactId>
@@ -125,5 +130,10 @@
       <artifactId>threadfix</artifactId>
       <version>${project.version}</version>
   </dependency>
+  <dependency> 
+    <groupId>xml-apis</groupId>
+    <artifactId>xml-apis</artifactId>
+    <version>1.4.01</version>
+</dependency>
   </dependencies>
 </project>

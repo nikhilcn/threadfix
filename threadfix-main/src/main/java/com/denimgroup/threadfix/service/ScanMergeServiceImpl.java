@@ -40,10 +40,9 @@ import com.denimgroup.threadfix.data.entities.Finding;
 import com.denimgroup.threadfix.data.entities.Scan;
 import com.denimgroup.threadfix.data.entities.User;
 import com.denimgroup.threadfix.data.entities.Vulnerability;
-import com.denimgroup.threadfix.service.channel.ChannelImporter;
-import com.denimgroup.threadfix.service.channel.ChannelImporterFactory;
+import com.denimgroup.threadfix.plugin.scanner.ChannelImporterFactory;
+import com.denimgroup.threadfix.plugin.scanner.service.channel.ChannelImporter;
 import com.denimgroup.threadfix.service.merge.FindingMatcher;
-import com.denimgroup.threadfix.service.merge.MergeConfigurationGenerator;
 import com.denimgroup.threadfix.service.merge.ScanMerger;
 
 // TODO figure out this Transactional stuff
@@ -126,9 +125,7 @@ public class ScanMergeServiceImpl implements ScanMergeService {
 	public void updateVulnerabilities(Application application) {
 		List<Vulnerability> vulnerabilities = application.getVulnerabilities();
 		
-		FindingMatcher matcher = new FindingMatcher(
-				MergeConfigurationGenerator.generateConfiguration(application, null),
-				null);
+		FindingMatcher matcher = new FindingMatcher(null);
 
 		if (vulnerabilities != null) {
 			for (int i = 0; i < vulnerabilities.size(); i++) {
@@ -201,8 +198,7 @@ public class ScanMergeServiceImpl implements ScanMergeService {
 			return null;
 		}
 	
-		scanMerger.merge(scan, scan.getApplicationChannel(),
-				MergeConfigurationGenerator.getDefaultConfiguration());
+		scanMerger.merge(scan, scan.getApplicationChannel());
 	
 		return scan;
 	}
@@ -241,6 +237,7 @@ public class ScanMergeServiceImpl implements ScanMergeService {
 				+ applicationChannel.getChannelType().getName() + ".");
 	
 		importer.setFileName(fileName);
+		
 		Scan scan = importer.parseInput();
 		
 		if (scan == null) {
@@ -251,8 +248,7 @@ public class ScanMergeServiceImpl implements ScanMergeService {
 	
 		updateJobStatus(statusId, "Findings successfully parsed, starting channel merge.");
 		
-		scanMerger.merge(scan, applicationChannel,
-				MergeConfigurationGenerator.generateConfiguration(applicationChannel.getApplication(), scan));
+		scanMerger.merge(scan, applicationChannel);
 		
 		vulnerabilityFilterService.updateVulnerabilities(
 				applicationChannel.getApplication().getOrganization().getId(),
