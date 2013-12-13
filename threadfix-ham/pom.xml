@@ -27,6 +27,7 @@
 			<artifactId>annotations</artifactId>
 			<version>${jetbrains-annotations.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -73,6 +74,13 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+
+    </dependencies>
 
 </project>

@@ -59,7 +59,7 @@ class GeneratorBasedEndpointDatabase implements EndpointDatabase {
 	protected final static SanitizedLogger log = new SanitizedLogger(GeneratorBasedEndpointDatabase.class);
 
 	public GeneratorBasedEndpointDatabase(@NotNull EndpointGenerator endpointGenerator,
-                                          @NotNull PathCleaner pathCleaner,
+                                          @Nullable PathCleaner pathCleaner,
                                           @NotNull FrameworkType frameworkType) {
 		
 		log.info("Using generic EndpointGenerator-based translator.");

@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 
 import com.denimgroup.threadfix.framework.beans.DefaultEndpoint;
 import com.denimgroup.threadfix.framework.engine.Endpoint;

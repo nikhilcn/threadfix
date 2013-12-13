@@ -22,7 +22,10 @@ public class PathCleanerFactory {
 			returnCleaner = new SpringPathCleaner(partialMappings);
         } else if (frameworkType == FrameworkType.JSP) {
             returnCleaner = new JSPPathCleaner(partialMappings);
-		} else {
+		} else if(frameworkType==FrameworkType.DJANGO){
+            //returnCleaner== new DjangoPathCleaner(partialMappings);
+            return null;
+        }else{
 			returnCleaner = new DefaultPathCleaner(partialMappings);
 		}
 		
