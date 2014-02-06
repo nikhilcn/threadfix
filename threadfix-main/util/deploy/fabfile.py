@@ -1,7 +1,7 @@
 from __future__ import with_statement
 from fabric.api import *
 from fabric.contrib.console import confirm
-import datetime, re
+import datetime, re, os
 
 env.hosts = ['localhost']
 #env.password = 'password'
