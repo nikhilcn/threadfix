@@ -160,9 +160,7 @@ public abstract class RealTimeProtectionGenerator {
 	 * @param uri
 	 * @param action
 	 * @param id
-	 * @param payload
 	 * @param parameter
-	 * @param message
 	 * @return A rule filtering the URL for a given parameter payload.
 	 */
 	protected String generateRuleWithParameter(String uri, String action, String id,
@@ -177,8 +175,6 @@ public abstract class RealTimeProtectionGenerator {
 	 * @param uri
 	 * @param action
 	 * @param id
-	 * @param payload
-	 * @param message
 	 * @return A rule prohibiting access to the exact URI.
 	 */
 	protected String generateRuleForExactUrl(String uri, String action, String id,
@@ -193,8 +189,6 @@ public abstract class RealTimeProtectionGenerator {
 	 * @param uri
 	 * @param action
 	 * @param id
-	 * @param payload
-	 * @param message
 	 * @return A rule filtering the URL for a given payload.
 	 */
 	protected String generateRuleWithPayloadInUrl(String uri, String action, String id,
@@ -401,6 +395,10 @@ public abstract class RealTimeProtectionGenerator {
 		
 		return returnString;
 	}
+
+    protected String quoteEscape(String toEscape) {
+        return toEscape.replace("\"", "\\\"");
+    }
 
 	/**
 	 * TODO avoid this method by using a set for the acceptable Strings?

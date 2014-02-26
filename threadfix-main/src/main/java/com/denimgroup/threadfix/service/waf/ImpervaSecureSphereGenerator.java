@@ -103,10 +103,10 @@ public class ImpervaSecureSphereGenerator extends RealTimeProtectionGenerator {
 					"\n    <source src-type=\"ThreadFix\" scan-id=\"" + scanId +"\"" +
 								" scan-date=\"" + time + "\" src-reference=\"13\" />" +
 					"\n    <parameters>" +
-					"\n        <url>" + uri + "</url>");
+					"\n        <url>" + quoteEscape(uri) + "</url>");
 			
 			if (parameter != null) {
-				sb.append("\n        <param-name>" + parameter + "</param-name>");
+				sb.append("\n        <param-name>" + quoteEscape(parameter) + "</param-name>");
 			}
 			
 			sb.append("\n    </parameters>" +

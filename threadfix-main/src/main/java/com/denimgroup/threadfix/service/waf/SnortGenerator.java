@@ -100,12 +100,12 @@ public class SnortGenerator extends RealTimeProtectionGenerator {
 		payload = payload.replace(";", "\\;");
 		
 		return action + " tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS (" +
-						"msg:\"" + message + "\"; " +
+						"msg:\"" + quoteEscape(message) + "\"; " +
 						"flow: to_server,established; " +
-						"content:\"" + uri + "?\"; http_uri; " +
-						"content:\"" + parameter + "=\"; http_uri; " +
+						"content:\"" + quoteEscape(uri) + "?\"; http_uri; " +
+						"content:\"" + quoteEscape(parameter) + "=\"; http_uri; " +
 						"pcre:\""
-			+ STR_FIND_PARAM_START + parameter + STR_FIND_PARAM_MID + payload
+			+ STR_FIND_PARAM_START + quoteEscape(parameter) + STR_FIND_PARAM_MID + quoteEscape(payload)
 			+ STR_FIND_PARAM_END
 			+ "; metadata:service http; "
 			+ "classtype:web-application-attack; sid:" + id + ";)";
@@ -121,9 +121,9 @@ public class SnortGenerator extends RealTimeProtectionGenerator {
 		payload = payload.replace(";", "\\;");
 		
 		return action + " tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS (" +
-						"msg:\"" + message + "\"; " +
+						"msg:\"" + quoteEscape(message) + "\"; " +
 						"flow: to_server,established; " +
-						"content:\"" + uri + "\"; http_uri;" +
+						"content:\"" + quoteEscape(uri) + "\"; http_uri;" +
 						"metadata:service http; " +
 						"classtype:web-application-attack; sid:" + id + ";)";
 	}
@@ -137,10 +137,10 @@ public class SnortGenerator extends RealTimeProtectionGenerator {
 		payload = payload.replace(";", "\\;");
 		
 		return action + " tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS (" +
-						"msg:\"" + message + "\"; " +
+						"msg:\"" + quoteEscape(message) + "\"; " +
 						"flow: to_server,established; " +
-						"content:\"" + uri + "\"; http_uri;" +
-						"pcre:\"/" + payload + "/Ui\"; " +
+						"content:\"" + quoteEscape(uri) + "\"; http_uri;" +
+						"pcre:\"/" + quoteEscape(payload) + "/Ui\"; " +
 						"metadata:service http; " +
 						"classtype:web-application-attack; sid:" + id + ";)";
 	}

@@ -65,10 +65,10 @@ public class ModSecurityWafGenerator extends RealTimeProtectionGenerator {
 		String payload = PAYLOAD_MAP.get(genericVulnName);
 		String message = MESSAGE_MAP.get(genericVulnName);
 		
-		return RULE_START_URI + pcreRegexEscape(uri) + "\""
-			+ "\"phase:2,chain," + action + ",msg:'" + message + ": " + uri
-			+ " [" + parameter + "]',id:'" + id + "',severity:'2'\"\n"
-			+ "SecRule ARGS:" + parameter + " \"" + payload + "\"\n";
+		return RULE_START_URI + quoteEscape(pcreRegexEscape(uri)) + "\""
+			+ "\"phase:2,chain," + action + ",msg:'" + quoteEscape(message) + ": " + quoteEscape(uri)
+			+ " [" + quoteEscape(parameter) + "]',id:'" + id + "',severity:'2'\"\n"
+			+ "SecRule ARGS:" + quoteEscape(parameter) + " \"" + quoteEscape(payload) + "\"\n";
 	}
 	
 	@Override
@@ -78,8 +78,8 @@ public class ModSecurityWafGenerator extends RealTimeProtectionGenerator {
 		String payload = PAYLOAD_MAP.get(genericVulnName);
 		String message = MESSAGE_MAP.get(genericVulnName);
 		
-		return RULE_START_URI + pcreRegexEscape(uri) + "[^?]*(" + payload + ")\""
-			+ "\"phase:2," + action + ",msg:'" + message + ": " + uri
+		return RULE_START_URI + quoteEscape(pcreRegexEscape(uri)) + "[^?]*(" + quoteEscape(payload) + ")\""
+			+ "\"phase:2," + action + ",msg:'" + quoteEscape(message) + ": " + quoteEscape(uri)
 			+ "',id:'" + id + "',severity:'2'\"\n";
 	}
 	
@@ -90,8 +90,8 @@ public class ModSecurityWafGenerator extends RealTimeProtectionGenerator {
 		String payload = PAYLOAD_MAP.get(genericVulnName);
 		String message = MESSAGE_MAP.get(genericVulnName);
 		
-		return RULE_START_URI + pcreRegexEscape(uri) + "(" + payload + ")"
-			+ "\"\"phase:2," + action + ",msg:'" + message + ": " + uri
+		return RULE_START_URI + quoteEscape(pcreRegexEscape(uri)) + "(" + quoteEscape(payload) + ")"
+			+ "\"\"phase:2," + action + ",msg:'" + quoteEscape(message) + ": " + quoteEscape(uri)
 			+ "',id:'" + id + "',severity:'2'\"\n";
 	}
 	

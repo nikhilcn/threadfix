@@ -100,8 +100,7 @@ public class DenyAllRWebGenerator extends RealTimeProtectionGenerator {
 		
 		String payload = POSIX_PAYLOAD_MAP.get(genericVulnName);
 		payload = payload.replace(";", "\\;");
-		payload = payload.replace("\"", "\\\"");
-		String pattern = uri + ".*" + parameter + "=.*" + payload;
+		String pattern = quoteEscape(uri) + ".*" + quoteEscape(parameter) + "=.*" + payload;
 
 		return templateStart + pattern + templateMiddle + id + templateEnd + action;
 	}
@@ -112,8 +111,7 @@ public class DenyAllRWebGenerator extends RealTimeProtectionGenerator {
 		
 		String payload = POSIX_PAYLOAD_MAP.get(genericVulnName);
 		payload = payload.replace(";", "\\;");
-		payload = payload.replace("\"", "\\\"");
-		String pattern = uri + payload;
+		String pattern = quoteEscape(uri) + payload;
 
 		return templateStart + pattern + templateMiddle + id + templateEnd + action;
 	}
@@ -124,8 +122,7 @@ public class DenyAllRWebGenerator extends RealTimeProtectionGenerator {
 		
 		String payload = POSIX_PAYLOAD_MAP.get(genericVulnName);
 		payload = payload.replace(";", "\\;");
-		payload = payload.replace("\"", "\\\"");
-		String pattern = uri + ".*" + payload + "";
+		String pattern = quoteEscape(uri) + ".*" + payload + "";
 		
 		return templateStart + pattern + templateMiddle + id + templateEnd + action;
 	}
