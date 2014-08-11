@@ -1,6 +1,30 @@
-type.info,,
-WhiteHat Sentinel
-type.vulnerabilities,,
+type.info,,,
+WhiteHat Sentinel,http://www.whitehatsec.com/home/services/services.html,-,You shouldn''t be seeing this.,
+type.vulnerabilities,,,
+LDAP Injection,LDAP Injection,90
+URL Redirector Abuse,URL Redirector Abuse,601
+Weak Password Recovery Validation,Weak Password Recovery Validation,640
+SSI Injection,SSI Injection,97
+Buffer Overflow,Buffer Overflow,120
+OS Command Injection,OS Command Injection,78
+Predictable Resource Location,Predictable Resource Location,425
+Session Fixation,Session Fixation,384
+SQL Injection,SQL Injection,89
+Cross Site Request Forgery,Cross Site Request Forgery,716
+Directory Traversal,Directory Traversal,34
+Path Traversal,Path Traversal,22
+Cross Site Scripting,Cross Site Scripting,79
+Remote File Inclusion,Remote File Inclusion,98
+Information Leakage,Information Leakage,200
+OS Commanding,OS Commanding,78
+Insufficient Authentication,Insufficient Authentication,287
+Brute Force,Brute Force,307
+Content Spoofing,Content Spoofing,290
+Format String Attack,Format String Attack,134
+Insufficient Session Expiration,Insufficient Session Expiration,613
+Insufficient Authorization,Insufficient Authorization,285
+Denail of Service,Denail of Service,400
+HTTP Response Splitting,HTTP Response Splitting,113
 Access of Unique Device Id,Access of Unique Device Id,284
 Access.Native.Win32,Access.Native.Win32,284
 Application Fails to Leverage SSLv3/TLS,Application Fails to Leverage SSLv3/TLS,311
@@ -23,7 +47,6 @@ Debug Enabled,Debug Enabled,489
 Denial of Service: ReadFile,Denial of Service: ReadFile,400
 Denial of Service: ReadLine,Denial of Service: ReadLine,400
 Denial of Service: Regex,Denial of Service: Regex,400
-Directory Indexing,Directory Indexing,538
 EMail Injection,EMail Injection,74
 Excessive Environment Permissions,Excessive Environment Permissions,276
 General Injection,General Injection,74
@@ -178,3 +201,9 @@ Persistent Session Cookie,Persistent Session Cookie,539
 Insufficient Cross-domain Configuration,Insufficient Cross-domain Configuration,352
 Invalid HTTP Method Usage,Invalid HTTP Method Usage,16
 Personally Identifiable Information,Personally Identifiable Information,359
+type.severities,,,
+1,1,1,1
+2,2,2,2
+3,3,3,3
+4,4,4,4
+5,5,5,5
