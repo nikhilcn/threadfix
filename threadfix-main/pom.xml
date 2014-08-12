@@ -565,6 +565,42 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>oracle</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.denimgroup.threadfix</groupId>
+                    <artifactId>threadfix-oracle-support</artifactId>
+                    <version>2.1-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>Oracle-Resource-Swap</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <delete file="target/classes/jdbc.properties"/>
+                                        <delete file="target/classes/import.sql"/>
+                                        <delete file="target/classes/applicationContext-hibernate.xml"/>
+                                        <copy file="src/main/resources/jdbc.properties.oracle" tofile="target/classes/jdbc.properties" />
+                                        <copy file="src/main/resources/import.sql.oracle" tofile="target/classes/import.sql" />
+                                        <copy file="src/main/resources/applicationContext-hibernate-oracle.xml" tofile="target/classes/applicationContext-hibernate.xml" />
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <!-- Enterprise profile turns on enterprise dependency -->
         <profile>
             <id>enterprise</id>

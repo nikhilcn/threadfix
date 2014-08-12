@@ -146,6 +146,12 @@
             </properties>
         </profile>
         <profile>
+            <id>oracle</id>
+            <modules>
+                <module>threadfix-database-support/threadfix-oracle-support</module>
+            </modules>
+        </profile>
+        <profile>
             <id>int</id>
             <build>
                 <pluginManagement>

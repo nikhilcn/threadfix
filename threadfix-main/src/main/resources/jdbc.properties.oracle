@@ -1,0 +1,13 @@
+# database settings, this can be the central location for different DB settings
+# that are referenced in /src/main/resources/applicationContext-hibernate.xml.
+
+#ORACLE
+jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+jdbc.url=jdbc:oracle:thin:@127.0.0.1:1521/orcl.denimgroup.com
+jdbc.username=C##test
+jdbc.password=test
+hibernate.dialect=com.denimgroup.threadfix.data.ThreadFixOracleDialect
+hibernate.hbm2ddl.auto=create
+
+hibernate.show_sql=false
+hibernate.format_sql=true

@@ -6,71 +6,72 @@
 -- ------------------------------------
 -- ROLES ------------------------------
 -- ------------------------------------
-INSERT INTO Role (id,createddate,modifieddate,displayname,active,canmanagesystemsettings,canmanagescanagents,cangeneratereports,cangeneratewafrules,canmanageapikeys,canmanageapplications,canmanagedefecttrackers,canmanageremoteproviders,canmanageroles,canmanageteams,canmanageusers,canmanagewafs,canmodifyvulnerabilities,cansubmitdefects,canuploadscans,canviewerrorlogs,canviewjobstatuses) VALUES (1, SYSDATE, SYSDATE, 'Administrator', 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
-INSERT INTO Role (id,createddate,modifieddate,displayname,active,canmanagesystemsettings,canmanagescanagents,cangeneratereports,cangeneratewafrules,canmanageapikeys,canmanageapplications,canmanagedefecttrackers,canmanageremoteproviders,canmanageroles,canmanageteams,canmanageusers,canmanagewafs,canmodifyvulnerabilities,cansubmitdefects,canuploadscans,canviewerrorlogs,canviewjobstatuses) VALUES (2, SYSDATE, SYSDATE, 'User', 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO Role (id, createdDate, modifiedDate, displayname, active,canGenerateReports,canGenerateWafRules,canManageApiKeys,canManageApplications,canManageDefectTrackers,canManageRemoteProviders,canManageRoles,canManageTeams,canManageUsers,canManageWafs,canModifyVulnerabilities,canSubmitDefects,canUploadScans,canViewErrorLogs,canViewJobStatuses) VALUES (1, now(), now(), 'Administrator', 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+INSERT INTO Role (id, createdDate, modifiedDate, displayname, active,canGenerateReports,canGenerateWafRules,canManageApiKeys,canManageApplications,canManageDefectTrackers,canManageRemoteProviders,canManageRoles,canManageTeams,canManageUsers,canManageWafs,canModifyVulnerabilities,canSubmitDefects,canUploadScans,canViewErrorLogs,canViewJobStatuses) VALUES (2, now(), now(), 'User', 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
-INSERT INTO "User" (id,active,approved,createddate,modifieddate,name,password,ROLEID,salt,failedpasswordattemptwindows,failedpasswordattempts,lastlogindate,lastpasswordchangeddate,locked,hasglobalgroupaccess,isldapuser) VALUES (1, 1, 1, SYSDATE, SYSDATE, 'user', '1ad7cb5116eea07356140e718895d3bad52220589e00efe99108031cc93df924', 1, 'd4639110-c8f1-4654-887f-aa9634bc457b', SYSDATE, 0,SYSDATE,SYSDATE,0,1,0);
+INSERT INTO User (id, active, approved, createdDate, modifiedDate, name, password, roleId, salt, failedPasswordAttemptWindowStart, failedPasswordAttempts, lastLoginDate, lastPasswordChangedDate, locked, hasGlobalGroupAccess, isLdapUser) VALUES (1, 1, 1, now(), now(), 'user', '1ad7cb5116eea07356140e718895d3bad52220589e00efe99108031cc93df924', 1, 'd4639110-c8f1-4654-887f-aa9634bc457b', now(), 0,now(),now(),0,1,0);
 
 -- ------------------------------------
 -- DEFAULTS ---------------------------
 -- ------------------------------------
-INSERT INTO DefaultConfiguration (id,globalgroupenabled,defaultroleid) VALUES (1, 1,1);
+INSERT INTO DefaultConfiguration (globalGroupEnabled, defaultRoleId) VALUES (1,1);
 
 -- ------------------------------------
 -- INSERT REMOTEPROVIDER TYPES --------
 -- ------------------------------------
-INSERT INTO RemoteProviderType (id, name,CHANNELTYPEID,hasapikey,hasusernamepassword,iseuropean,encrypted) VALUES (1, 'WhiteHat Sentinel', (SELECT id FROM ChannelType WHERE name = 'WhiteHat Sentinel'), 1, 0, 0, 0);
-INSERT INTO RemoteProviderType (id, name,CHANNELTYPEID,hasapikey,hasusernamepassword,iseuropean,encrypted) VALUES (2, 'Veracode', (SELECT id FROM ChannelType WHERE name = 'Veracode'), 0, 1, 0, 0);
-INSERT INTO RemoteProviderType (id, name,CHANNELTYPEID,hasapikey,hasusernamepassword,iseuropean,encrypted) VALUES (3, 'QualysGuard WAS', (SELECT id FROM ChannelType WHERE name = 'QualysGuard WAS'), 0, 1, 0, 0);
+INSERT INTO RemoteProviderType (name, channelTypeId, hasApiKey, hasUserNamePassword, isEuropean, encrypted) VALUES ('WhiteHat Sentinel', (SELECT id FROM ChannelType WHERE name = 'WhiteHat Sentinel'), true, false, false, false);
+INSERT INTO RemoteProviderType (name, channelTypeId, hasApiKey, hasUserNamePassword, isEuropean, encrypted) VALUES ('Veracode', (SELECT id FROM ChannelType WHERE name = 'Veracode'), false, true, false, false);
+INSERT INTO RemoteProviderType (name, channelTypeId, hasApiKey, hasUserNamePassword, isEuropean, encrypted) VALUES ('QualysGuard WAS', (SELECT id FROM ChannelType WHERE name = 'QualysGuard WAS'), false, true, false, false);
 
 -- ------------------------------------
 -- INSERT APPLICATION CRITICALITIES ---
 -- ------------------------------------
-INSERT INTO ApplicationCriticality (id,name) VALUES (1, 'Low');
-INSERT INTO ApplicationCriticality (id,name) VALUES (2, 'Medium');
-INSERT INTO ApplicationCriticality (id,name) VALUES (3, 'High');
-INSERT INTO ApplicationCriticality (id,name) VALUES (4, 'Critical');
+INSERT INTO ApplicationCriticality (name) VALUES ('Low');
+INSERT INTO ApplicationCriticality (name) VALUES ('Medium');
+INSERT INTO ApplicationCriticality (name) VALUES ('High');
+INSERT INTO ApplicationCriticality (name) VALUES ('Critical');
 
 -- ------------------------------------
 -- INSERT WAFTYPES --------------------
 -- ------------------------------------
-INSERT INTO WafType (id,name,initialid) VALUES (1,'Snort', 100000);
-INSERT INTO WafType (id,name,initialid) VALUES (2,'mod_security', 100000);
-INSERT INTO WafType (id,name,initialid) VALUES (3,'BIG-IP ASM', 100000);
-INSERT INTO WafType (id,name,initialid) VALUES (4,'Imperva SecureSphere', 100000);
-INSERT INTO WafType (id,name,initialid) VALUES (5,'DenyAll rWeb', 100000);
+INSERT INTO WafType (name, initialID) VALUES ('Snort', 100000);
+INSERT INTO WafType (name, initialID) VALUES ('mod_security', 100000);
+INSERT INTO WafType (name, initialID) VALUES ('BIG-IP ASM', 100000);
+INSERT INTO WafType (name, initialID) VALUES ('Imperva SecureSphere', 100000);
+INSERT INTO WafType (name, initialID) VALUES ('DenyAll rWeb', 100000);
 
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (1,'alert', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (2,'log', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (3,'pass', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (4,'activate', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (5,'dynamic', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (6,'drop', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (7,'reject', (SELECT id FROM WafType WHERE name = 'Snort'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (8,'sdrop', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('alert', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('log', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('pass', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('activate', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('dynamic', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('drop', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('reject', (SELECT id FROM WafType WHERE name = 'Snort'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('sdrop', (SELECT id FROM WafType WHERE name = 'Snort'));
 
 -- These require additional data, which we can't handle right now.
--- INSERT INTO WafRuleDirective (directive,WAFTYPEID) VALUES ('proxy', (SELECT id FROM WafType WHERE name = 'mod_security'));
--- INSERT INTO WafRuleDirective (directive,WAFTYPEID) VALUES ('redirect', (SELECT id FROM WafType WHERE name = 'mod_security'));
+-- INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('proxy', (SELECT id FROM WafType WHERE name = 'mod_security'));
+-- INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('redirect', (SELECT id FROM WafType WHERE name = 'mod_security'));
 
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (9,'deny', (SELECT id FROM WafType WHERE name = 'mod_security'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (10,'drop', (SELECT id FROM WafType WHERE name = 'mod_security'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (11,'pass', (SELECT id FROM WafType WHERE name = 'mod_security'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (12,'allow', (SELECT id FROM WafType WHERE name = 'mod_security'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('deny', (SELECT id FROM WafType WHERE name = 'mod_security'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('drop', (SELECT id FROM WafType WHERE name = 'mod_security'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('pass', (SELECT id FROM WafType WHERE name = 'mod_security'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('allow', (SELECT id FROM WafType WHERE name = 'mod_security'));
 
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (13,'transparent', (SELECT id FROM WafType WHERE name = 'BIG-IP ASM'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (14,'blocking', (SELECT id FROM WafType WHERE name = 'BIG-IP ASM'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('transparent', (SELECT id FROM WafType WHERE name = 'BIG-IP ASM'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('blocking', (SELECT id FROM WafType WHERE name = 'BIG-IP ASM'));
 
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (15,'-', (SELECT id FROM WafType WHERE name = 'Imperva SecureSphere'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('-', (SELECT id FROM WafType WHERE name = 'Imperva SecureSphere'));
 
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (16,'deny', (SELECT id FROM WafType WHERE name = 'DenyAll rWeb'));
-INSERT INTO WafRuleDirective (id,directive,WAFTYPEID) VALUES (17,'warning', (SELECT id FROM WafType WHERE name = 'DenyAll rWeb'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('deny', (SELECT id FROM WafType WHERE name = 'DenyAll rWeb'));
+INSERT INTO WafRuleDirective (directive, wafTypeId) VALUES ('warning', (SELECT id FROM WafType WHERE name = 'DenyAll rWeb'));
 
 -- ------------------------------------
 -- INSERT GENERIC MAPPINGS
 -- ------------------------------------
-INSERT INTO GenericSeverity (id,name,intvalue) VALUES (1, 'Critical', 5);
-INSERT INTO GenericSeverity (id,name,intvalue) VALUES (2, 'High', 4);
-INSERT INTO GenericSeverity (id,name,intvalue) VALUES (3, 'Medium', 3);
-INSERT INTO GenericSeverity (id,name,intvalue) VALUES (4, 'Low', 2);
-INSERT INTO GenericSeverity (id,name,intvalue) VALUES (5, 'Info', 1);
+INSERT INTO GenericSeverity (Name, intValue) VALUES ('Critical', 5);
+INSERT INTO GenericSeverity (Name, intValue) VALUES ('High', 4);
+INSERT INTO GenericSeverity (Name, intValue) VALUES ('Medium', 3);
+INSERT INTO GenericSeverity (Name, intValue) VALUES ('Low', 2);
+INSERT INTO GenericSeverity (Name, intValue) VALUES ('Info', 1);
+

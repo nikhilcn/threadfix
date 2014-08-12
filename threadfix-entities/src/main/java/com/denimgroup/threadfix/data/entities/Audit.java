@@ -29,20 +29,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Audit")
+@Table
 public class Audit extends BaseEntity {
 
-	private static final long serialVersionUID = -8072542556147347289L;
+    private static final long serialVersionUID = -8072542556147347289L;
 
-	private Vulnerability vulnerability;
+    private Vulnerability vulnerability;
 
-	@ManyToOne
-	@JoinColumn(name = "vulnerabilityId")
-	public Vulnerability getVulnerability() {
-		return vulnerability;
-	}
+    @ManyToOne
+    @JoinColumn(name = "vulnerabilityId")
+    public Vulnerability getVulnerability() {
+        return vulnerability;
+    }
 
-	public void setVulnerability(Vulnerability vulnerability) {
-		this.vulnerability = vulnerability;
-	}
+    public void setVulnerability(Vulnerability vulnerability) {
+        this.vulnerability = vulnerability;
+    }
 }

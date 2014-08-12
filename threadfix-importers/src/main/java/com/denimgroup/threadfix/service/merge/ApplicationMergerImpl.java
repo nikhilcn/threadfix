@@ -38,7 +38,7 @@ import java.util.List;
 
 @Service
 public class ApplicationMergerImpl implements ApplicationMerger {
-	
+
 	private ApplicationDao applicationDao;
 	private ScanDao scanDao;
 	private JobStatusService jobStatusService;

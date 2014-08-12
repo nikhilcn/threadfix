@@ -48,7 +48,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-import static com.denimgroup.threadfix.CollectionUtils.newMap;
+import static com.denimgroup.threadfix.CollectionUtils.map;
 import static com.denimgroup.threadfix.remote.response.RestResponse.failure;
 import static com.denimgroup.threadfix.remote.response.RestResponse.success;
 import static com.denimgroup.threadfix.service.util.ControllerUtils.writeSuccessObjectWithView;
@@ -110,11 +110,11 @@ public class ApplicationsIndexController {
         if (organizations == null) {
             return failure("No organizations found.");
         } else {
-            Map<String, Object> map = newMap();
-
-            map.put("teams", organizations);
-            map.put("canEditIds", PermissionUtils.getIdsWithPermission(Permission.CAN_MANAGE_APPLICATIONS, organizations));
-            map.put("canUploadIds", PermissionUtils.getAppIdsWithPermission(Permission.CAN_UPLOAD_SCANS, organizations));
+            Map<String, ?> map = map(
+                    "teams", organizations,
+                    "canEditIds", PermissionUtils.getIdsWithPermission(Permission.CAN_MANAGE_APPLICATIONS, organizations),
+                    "canUploadIds", PermissionUtils.getAppIdsWithPermission(Permission.CAN_UPLOAD_SCANS, organizations)
+            );
 
             return writeSuccessObjectWithView(map, AllViews.TableRow.class);
         }

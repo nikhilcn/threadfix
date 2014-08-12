@@ -103,7 +103,7 @@ public class DocumentServiceImpl implements DocumentService {
 			log.warn("Invalid filetype for upload: "+file.getContentType());
 			return null;
 		}
-		
+
 		Document doc = new Document();
 		String fileFullName;
 		

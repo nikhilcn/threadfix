@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "User")
+@Table
 public class User extends AuditableEntity {
 
 	private static final long serialVersionUID = -5821877436246475858L;

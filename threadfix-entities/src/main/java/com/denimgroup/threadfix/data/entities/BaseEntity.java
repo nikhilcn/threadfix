@@ -55,7 +55,7 @@ public class BaseEntity implements Serializable {
 	private Integer id = null;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Object.class)
 	public Integer getId() {
 		return id;

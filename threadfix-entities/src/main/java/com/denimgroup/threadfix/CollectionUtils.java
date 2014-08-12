@@ -132,4 +132,34 @@ public class CollectionUtils {
     public static <K, V> Map<K, V> newMap() {
         return new HashMap<K, V>();
     }
+
+    @Nonnull
+    public static <K, V> Map<K, V> map(K key1, V value1) {
+        Map<K, V> returnMap = newMap();
+
+        returnMap.put(key1, value1);
+
+        return returnMap;
+    }
+
+    @Nonnull
+    public static <K, V> Map<K, V> map(K key1, V value1, K key2, V value2) {
+        Map<K, V> returnMap = newMap();
+
+        returnMap.put(key1, value1);
+        returnMap.put(key2, value2);
+
+        return returnMap;
+    }
+
+    @Nonnull
+    public static <K, V> Map<K, V> map(K key1, V value1, K key2, V value2, K key3, V value3) {
+        Map<K, V> returnMap = newMap();
+
+        returnMap.put(key1, value1);
+        returnMap.put(key2, value2);
+        returnMap.put(key3, value3);
+
+        return returnMap;
+    }
 }

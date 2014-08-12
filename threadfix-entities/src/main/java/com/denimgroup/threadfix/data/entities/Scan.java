@@ -34,7 +34,7 @@ import java.util.*;
 import static com.denimgroup.threadfix.CollectionUtils.list;
 
 @Entity
-@Table(name = "Scan")
+@Table
 public class Scan extends BaseEntity implements Iterable<Finding> {
 
 	private static final long serialVersionUID = -8461350611851383656L;

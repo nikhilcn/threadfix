@@ -34,7 +34,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @Entity
-@Table(name = "Finding")
+@Table
 public class Finding extends AuditableEntity implements FindingLike {
 
 	private static final long serialVersionUID = 5978786078427181952L;

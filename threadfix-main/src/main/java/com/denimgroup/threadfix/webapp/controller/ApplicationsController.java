@@ -54,7 +54,10 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.denimgroup.threadfix.CollectionUtils.list;
 import static com.denimgroup.threadfix.service.util.ControllerUtils.writeSuccessObjectWithView;

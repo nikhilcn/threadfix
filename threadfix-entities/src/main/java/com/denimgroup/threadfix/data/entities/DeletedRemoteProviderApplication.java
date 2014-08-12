@@ -29,7 +29,7 @@ import javax.validation.constraints.Size;
 import java.util.Calendar;
 
 @Entity
-@Table(name = "DeletedRemoteProviderApplication")
+@Table
 public class DeletedRemoteProviderApplication extends AuditableEntity {
 
 	private static final long serialVersionUID = -7724716111157245914L;

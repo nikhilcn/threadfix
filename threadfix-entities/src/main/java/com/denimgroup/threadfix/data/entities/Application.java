@@ -66,7 +66,7 @@ public class Application extends AuditableEntity {
 
     @URL(message = "{errors.url}")
     @Size(min = 0, max = URL_LENGTH, message = "{errors.maxlength} " + URL_LENGTH + ".")
-    private  String repositoryUrl;
+    private String repositoryUrl;
 
     @Size(max = 80, message = "{errors.maxlength} 80.")
     private String repositoryBranch, repositoryDBBranch;
@@ -83,26 +83,26 @@ public class Application extends AuditableEntity {
     @Size(max = 1024, message = "{errors.maxlength} 1024.")
     private String repositoryEncryptedUserName;
 
-	@URL(message = "{errors.url}")
-	@Size(min = 0, max = URL_LENGTH, message = "{errors.maxlength} " + URL_LENGTH + ".")
-	private String url;
-	
-	@Size(min = 0, max = URL_LENGTH, message = "{errors.maxlength} " + URL_LENGTH + ".")
-	private String uniqueId;
-	
-	@Size(max = 255, message = "{errors.maxlength} 255.")
-	private String projectRoot;
-	@Size(max = 255, message = "{errors.maxlength} 255.")
-	private String rootPath;
+    @URL(message = "{errors.url}")
+    @Size(min = 0, max = URL_LENGTH, message = "{errors.maxlength} " + URL_LENGTH + ".")
+    private String url;
 
-	private Organization organization;
-	private Waf waf;
-	private ApplicationCriticality applicationCriticality;
-	
-	@Size(max = 50, message = "{errors.maxlength} 50.")
-	private String projectName;
-	
-	@Size(max = 25, message = "{errors.maxlength} 25.")
+    @Size(min = 0, max = URL_LENGTH, message = "{errors.maxlength} " + URL_LENGTH + ".")
+    private String uniqueId;
+
+    @Size(max = 255, message = "{errors.maxlength} 255.")
+    private String projectRoot;
+    @Size(max = 255, message = "{errors.maxlength} 255.")
+    private String rootPath;
+
+    private Organization           organization;
+    private Waf                    waf;
+    private ApplicationCriticality applicationCriticality;
+
+    @Size(max = 50, message = "{errors.maxlength} 50.")
+    private String projectName;
+
+    @Size(max = 25, message = "{errors.maxlength} 25.")
 	private String projectId;
 	
 	@Size(max = 50, message = "{errors.maxlength} 50.")

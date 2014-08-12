@@ -32,14 +32,14 @@ import java.sql.Types;
  */
 public class ThreadFixOracleDialect extends Oracle10gDialect {
 
-    public ThreadFixOracleDialect() {
-        super();
-    }
-
+    /**
+     * Mapping VARCHAR to long causes problems for the Finding table because Oracle
+     * can only have one LONG type per table. This overrides the default Oracle behavior and
+     * allows Finding to be created properly.
+     */
     @Override
     protected void registerCharacterTypeMappings() {
         super.registerCharacterTypeMappings();
-        // This should force all long string types to become clobs. Let's see
         registerColumnType( Types.LONGVARCHAR, Integer.MAX_VALUE, "clob" );
         registerColumnType( Types.VARCHAR, "clob" );
     }
