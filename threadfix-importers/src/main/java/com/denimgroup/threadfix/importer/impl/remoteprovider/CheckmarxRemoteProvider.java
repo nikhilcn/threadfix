@@ -24,11 +24,31 @@
 
 package com.denimgroup.threadfix.importer.impl.remoteprovider;
 
+import com.denimgroup.threadfix.data.entities.RemoteProviderApplication;
+import com.denimgroup.threadfix.data.entities.Scan;
+import com.denimgroup.threadfix.data.entities.ScannerType;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by dzabdi88 on 8/20/14.
  */
-public class CheckmarxRemoteProvider {
+public class CheckmarxRemoteProvider extends RemoteProvider {
 
+    public CheckmarxRemoteProvider() {
+        super(ScannerType.CHECKMARX);
+    }
+
+    @Override
+    public List<Scan> getScans(RemoteProviderApplication remoteProviderApplication) {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<RemoteProviderApplication> fetchApplications() {
+        return new ArrayList<>();
+    }
 
 
 }
